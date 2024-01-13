@@ -1,0 +1,37 @@
+﻿@model ICI.ProvaCandidato.Web.Models.Tag
+
+@{
+    ViewData["Title"] = "Deletar";
+}
+
+<h1>Deletar</h1>
+
+@if (Model != null){
+    <h3>Tem certeza de que deseja excluir isto?</h3>
+    <div>
+        <h4>Tag</h4>
+        <hr />
+        <dl class="row">
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Descricao)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Descricao)
+            </dd>
+        </dl>
+
+        <form asp-action="Delete">
+            <input type="hidden" asp-for="TagId" />
+            <input type="submit" value="Excluir" class="btn btn-danger" /> |
+            <a asp-action="Index">Voltar</a>
+        </form>
+    </div>
+}
+else
+{
+    <div class="alert alert-danger mt-3 text-center">
+        <h3>Não foi possível excluir esta Tag.</h3>
+        <h4>Esta Tag está atualmente vinculada a uma Notícia.</h4>
+        <a asp-action="Index">Voltar</a>
+    </div>
+}

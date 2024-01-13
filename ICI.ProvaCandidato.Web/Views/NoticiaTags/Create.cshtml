@@ -1,0 +1,53 @@
+﻿@model ICI.ProvaCandidato.Web.Models.NoticiaTag
+
+@{
+    ViewData["Title"] = "Criar";
+}
+@if (ViewData["NoticiaId"] == null || ((SelectList)ViewData["NoticiaId"]).Count() == 0 || 
+ ViewData["TagId"] == null || ((SelectList)ViewData["TagId"]).Count() == 0)
+{
+    <div class="alert alert-danger mt-3 text-center">
+        <h3>Nao existem Noticias ou Tags cadastradas.</h3>
+        <h4>Antes de criar uma Tag de Noticias, verifique se existem Tag e Noticia disponiveis.</h4>
+    </div>
+}
+else
+{
+    <h1>Criar</h1>
+
+    <h4>Tag de Noticia</h4>
+    <hr />
+    <div class="row">
+        <div class="col-md-4">
+            <form asp-action="Create">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-group">
+                    <label asp-for="NoticiaId" class="control-label">Noticia</label>
+                    <select asp-for="NoticiaId" class="form-control" asp-items="ViewBag.NoticiaId"></select>
+                    <span asp-validation-for="NoticiaId" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="TagId" class="control-label">Tag</label>
+                    <select asp-for="TagId" class="form-control" asp-items="ViewBag.TagId"></select>
+                    <span asp-validation-for="TagId" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="Criar" class="btn btn-primary" />
+                    <button type="button" class="btn btn-danger" onclick="limparImput()">Limpar Campos</button>
+                </div>
+            </form>
+        </div>
+    </div>
+}
+
+
+<div>
+    <a asp-action="Index">Voltar</a>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+        await Html.RenderPartialAsync("_ScriptLimparInputs");
+    }
+}

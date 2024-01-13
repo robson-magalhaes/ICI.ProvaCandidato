@@ -1,0 +1,10 @@
+﻿<script>
+    function limparImput() {
+        var elementosInput = document.querySelectorAll('input, textarea, select');
+        elementosInput.forEach(function (elemento) {
+            if (elemento.type !== 'button' && elemento.type !== 'submit' && elemento.type !== 'reset' && elemento.type !== 'hidden') {
+                elemento.value = '';
+            }
+        });
+    }
+</script>

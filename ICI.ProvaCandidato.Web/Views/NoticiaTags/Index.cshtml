@@ -1,0 +1,53 @@
+﻿@model IEnumerable<ICI.ProvaCandidato.Web.Models.NoticiaTag>
+
+@{
+    ViewData["Title"] = "Tag de Noticias";
+}
+
+<h1>Tag de Noticias</h1>
+
+<div class="container">
+    <div class="row d-flex justify-content-between">
+        <p>
+            <a asp-action="Create">Criar vinculo de Tag e Noticia</a>
+        </p>
+        <form class="form form-inline" asp-action="Pesquisar" method="get">
+            <div class="form-group">
+                <label for="tagSearch" class="control-label"></label>
+                <input type="text" id="tagSearch" name="descricao" class="form-control" />
+            </div>
+            <div class="form-group">
+                <button type="submit" class="btn btn-primary">Pesquisar</button>
+            </div>
+        </form>
+    </div>
+</div>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Descrição da Tag
+            </th>
+            <th>
+                Titulo da Noticia
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Tag.Descricao)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Noticia.Titulo)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.NoticiaTagId">Editar</a> |
+                <a asp-action="Details" asp-route-id="@item.NoticiaTagId">Detalhes</a> |
+                <a asp-action="Delete" asp-route-id="@item.NoticiaTagId">Deletar</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

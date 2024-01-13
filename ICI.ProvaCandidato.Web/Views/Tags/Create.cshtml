@@ -1,0 +1,67 @@
+﻿@model ICI.ProvaCandidato.Web.Models.Tag
+
+@{
+    ViewData["Title"] = "Criar";
+}
+
+<h1>Criar</h1>
+
+<h4>Tag</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create" id="meuFormulario">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Descricao" class="control-label">Descrição</label>
+                <input asp-for="Descricao" class="form-control" id="Descricao" />
+                <span asp-validation-for="Descricao" class="text-danger"></span>
+                <span class="text-danger" id="DescricaoError"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Criar" class="btn btn-primary" />
+                <button type="button" class="btn btn-danger" onclick="limparImput()">Limpar Campos</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Voltar</a>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+        await Html.RenderPartialAsync("_ScriptLimparInputs");
+        <script>
+            document.addEventListener('DOMContentLoaded', function () {
+                var formulario = document.getElementById('meuFormulario');
+
+                formulario.addEventListener('submit', function (event) {
+                    if (!validarFormulario()) {
+                        event.preventDefault();
+                    }
+                });
+
+                function validarFormulario() {
+                    var descricao = document.getElementById('Descricao').value;
+                    //var descricaoError = document.getElementById('DescricaoError');
+
+                    if (descricao.trim() === '') {
+                        alert('Campo obrigatório');
+                        //descricaoError.textContent = 'Campo obrigatório';
+                        return false;
+                    } else if (descricao.length > 100) {
+                        alert('O campo deve ter no máximo 100 caracteres');
+                        //descricaoError.textContent = 'O campo deve ter no máximo 100 caracteres';
+                        return false;
+                    } else {
+                        //descricaoError.textContent = '';
+                        return true;
+                    }
+                }
+            });
+        </script>
+    }
+}
